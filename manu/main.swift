@@ -39,7 +39,7 @@ class DisplayInfo {
 """)
                 continue
             }
-             MenuList = [Hamburger() , Dessert()] // 버거, 맥주 , 아이스크림, 사이드 객체 추가
+            var MenuList = [AnyObject() , Dessert()] as AnyObject  // 버거, 맥주 , 아이스크림, 사이드 객체 추가
             switch num {
             case 1 :
                 var rValue = (MenuList[0] as! Hamburger).displayInfo()
