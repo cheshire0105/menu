@@ -44,9 +44,9 @@ class Dessert {
 
 """)
         
-        var price : (String, UInt) = ("Default", 0)
+        let price : (String, UInt) = ("Default", 0)
         
-        var selectedStr = readLine()
+        let selectedStr = readLine()
         
         guard let selectedStr = selectedStr else {
             print("숫자로 입력해주세요.")
