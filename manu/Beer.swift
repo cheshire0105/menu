@@ -1,20 +1,6 @@
 // Foundation 프레임워크를 import 합니다.
 import Foundation
 
-//class OrderBeer{
-//    var name : String?
-//    var price : BeerPrice?
-//    init(name: String? = "", price : BeerPrice? = BeerPrice.Default) {
-//        self.name = name
-//        self.price = price
-//    }
-//    func showInfo(){
-//        print("name -> \(name),price -> \(price)")
-//    }
-//    func getPriceWithName() ->(UInt, String){
-//        return (UInt(price!.rawValue), name!)
-//    }
-//}
 
 enum BeerPrice: Int {
     case Default = 0
@@ -24,7 +10,13 @@ enum BeerPrice: Int {
     case Heineken = 7000
 }
 
-class Beer {
+class Beer : MenuProc {
+
+    
+    init(){
+        
+    }
+    
     var beerArray : Array<Beer>  = []
     var name : String?
     var cnt : Int?
@@ -35,11 +27,7 @@ class Beer {
     }
     
     func showCountOf(name : String, price : Int){
-        print("""
-        
-        갯수를 입력해주세요.
-        }
-        """)
+        print("갯수를 입력해주세요.")
         self.name = name
         self.price = price
         var cnt = readLine()
@@ -47,9 +35,7 @@ class Beer {
         self.cnt = Int(cnt)
            
     }
-    init(){
-        
-    }
+
     
     func displayInfo()  {
         print("""
@@ -101,7 +87,12 @@ class Beer {
         }
                 
         beerArray.append(obj)
-        print(beerArray)
+        //배열객체 프린트
+        for i in 0..<beerArray.count{
+            print("beerArra[\(i)] -> name: \(beerArray[i].name!)")
+            print("beerArra[\(i)] -> price :\(beerArray[i].price!)")
+            print("beerArra[\(i)] -> cnt : \(beerArray[i].cnt!)")
+        }
        
     }
 }
