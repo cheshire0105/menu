@@ -10,13 +10,17 @@ import Foundation
 class Order{
     var name : String?
     var price : HamburgurPrice?
-    init(name: String? = "", hamburgurprice : HamburgurPrice = HamburgurPrice.Default ) {
+    init(name: String? = "", price : HamburgurPrice? = HamburgurPrice.Default) {
         self.name = name
-        self.price = hamburgurprice
+        self.price = price
     }
     func showInfo(){
         
+        print("name -> \(name),price -> \(price)")
+    }
+    func getPriceWithName() ->(UInt, String){
         
+        return (UInt(price!.rawValue), name!)
     }
     
     
@@ -27,20 +31,15 @@ enum HamburgurPrice: Int {
     case ShackBurger = 6900
     case SmokeShack = 8900
     case ShroomBurger = 9400
-    case Cheeseburger = 5400
+    case Cheeseburger = 7000
+    case Hamburger = 5400
 }
 
 class Hamburger {
-//    var name : String?
-//    var price : UInt?
-//
-//    init(name: String? = "", price: UInt? = 0) {
-//        self.name = name
-//        self.price = price
-//    }
     var order : Order?
     
     func displayInfo() -> (UInt, String)  {
+        
 print("""
 [ Burgers MENU ]
 1. ShackBurger | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거
@@ -51,46 +50,48 @@ print("""
 0. 뒤로가기 | 뒤로가기
 }
 """)
+        var price :(UInt, String) = (0,"Default")
         
         
         var selectedStr = readLine()
         guard let selectedStr = selectedStr else{
             print("숫자로 선택해주세요.")
-            //return
+            order = Order(name :"", price : HamburgurPrice.Default)
+            return order!.getPriceWithName()
             }
         let slectedNum = Int(selectedStr)
         guard let slectedNum = slectedNum else{
             print("올바른 번호를 선택해주세요")
+            order = Order(name :"", price : HamburgurPrice.Default)
+            return order!.getPriceWithName()
            }
         switch slectedNum{
         case  1 :
             print("ShackBurger를 선택하셨습니다")
-            Order = Order(name :"ShackBurger" , hamburgurprice: HamburgurPrice.ShackBurger)
+            order = Order(name :"ShackBurger", price : HamburgurPrice.ShackBurger)
             
         case  2 :
             print("SmokeShack를 선택하셨습니다")
-           // price = 8900
+            order = Order(name :"SmokeShack", price : HamburgurPrice.SmokeShack)
             
         case  3 :
             print("Shroom를 선택하셨습니다")
-           // price = 9400
+            order = Order(name :"ShroomBurger", price : HamburgurPrice.ShroomBurger)
             
         case  4 :
             print("Cheeseburger를 선택하셨습니다")
-           // price = 6900
+            order = Order(name :"Cheeseburger", price : HamburgurPrice.Cheeseburger)
             
         case  5 :
             print("Hamburger를 선택하셨습니다")
-            //price = 5400
+            order = Order(name :"Hamburger", price : HamburgurPrice.Hamburger)
             
     
         default :
             print("올바른 번호로 선택해주세요.")
-           // price = 0
             
         }
-        //return price!
-        return (price,"Hamburger")
+        return order!.getPriceWithName()
     }
     
 }

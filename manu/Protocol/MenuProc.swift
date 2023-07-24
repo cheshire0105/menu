@@ -10,7 +10,7 @@ import Foundation
 
 protocol MenuProc{
 
-    func displayInfo() -> UInt //디스플레이 함수 구현해야할것
+    func displayInfo() -> (UInt, String)//디스플레이 함수 구현해야할것
     
 }
 
