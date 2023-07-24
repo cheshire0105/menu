@@ -39,17 +39,20 @@ class DisplayInfo {
 """)
                 continue
             }
-             MenuList = [Hamburger() , Dessert()] // 버거, 맥주 , 아이스크림, 사이드 객체 추가
+             MenuList = [Hamburger() , Dessert(), Beer()] // 버거, 맥주 , 아이스크림, 사이드 객체 추가
             switch num {
             case 1 :
                 var rValue = (MenuList[0] as! Hamburger).displayInfo()
-                
                 let rValue2 = (MenuList[0] as! Hamburger).order?.getPriceWithName()
                 print("price ->\(rValue2!.0), name ->\(rValue2!.1)")
             case 2 :
-                print("1")
+                var rValue = (MenuList[1] as! Dessert).displayInfo()
+                let rValue2 = (MenuList[1] as! Dessert).oderDessert?.getNameAndPrice()
+                print("price ->\(rValue2!.0), name ->\(rValue2!.1)")
             case 3 :
-                print("1")
+                var rValue = (MenuList[2] as! Beer).displayInfo()
+                let rValue2 = (MenuList[2] as! Beer).order?.getPriceWithName()
+                print("price ->\(rValue2!.0), name ->\(rValue2!.1)")
             case 4 :
                 print("1")
             case 0 :
