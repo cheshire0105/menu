@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F8B1CE22A6E24E90023BA85 /* MenuProc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CE12A6E24E90023BA85 /* MenuProc.swift */; };
+		5F8B1CE72A6E3E430023BA85 /* Hamburger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8B1CE62A6E3E430023BA85 /* Hamburger.swift */; };
 		FF6C74802A6E235A008845ED /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF6C747F2A6E235A008845ED /* main.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		5F8B1CE12A6E24E90023BA85 /* MenuProc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuProc.swift; sourceTree = "<group>"; };
+		5F8B1CE62A6E3E430023BA85 /* Hamburger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hamburger.swift; sourceTree = "<group>"; };
 		FF6C747C2A6E235A008845ED /* manu */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = manu; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF6C747F2A6E235A008845ED /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -44,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				5F8B1CE12A6E24E90023BA85 /* MenuProc.swift */,
+				5F8B1CE62A6E3E430023BA85 /* Hamburger.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -133,6 +136,7 @@
 			files = (
 				5F8B1CE22A6E24E90023BA85 /* MenuProc.swift in Sources */,
 				FF6C74802A6E235A008845ED /* main.swift in Sources */,
+				5F8B1CE72A6E3E430023BA85 /* Hamburger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
