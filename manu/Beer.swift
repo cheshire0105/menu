@@ -1,20 +1,20 @@
 // Foundation 프레임워크를 import 합니다.
 import Foundation
 
-class OrderBeer{
-    var name : String?
-    var price : BeerPrice?
-    init(name: String? = "", price : BeerPrice? = BeerPrice.Default) {
-        self.name = name
-        self.price = price
-    }
-    func showInfo(){
-        print("name -> \(name),price -> \(price)")
-    }
-    func getPriceWithName() ->(UInt, String){
-        return (UInt(price!.rawValue), name!)
-    }
-}
+//class OrderBeer{
+//    var name : String?
+//    var price : BeerPrice?
+//    init(name: String? = "", price : BeerPrice? = BeerPrice.Default) {
+//        self.name = name
+//        self.price = price
+//    }
+//    func showInfo(){
+//        print("name -> \(name),price -> \(price)")
+//    }
+//    func getPriceWithName() ->(UInt, String){
+//        return (UInt(price!.rawValue), name!)
+//    }
+//}
 
 enum BeerPrice: Int {
     case Default = 0
@@ -25,10 +25,33 @@ enum BeerPrice: Int {
 }
 
 class Beer {
-    var order : OrderBeer?
+    var beerArray : Array<Beer>  = []
+    var name : String?
+    var cnt : Int?
+    var price : Int?
+    init(name : String, price : Int, cnt : Int) {
+        self.name = name
+        self.cnt = cnt
+    }
     
-  
-    func displayInfo() -> (UInt, String)  {
+    func showCountOf(name : String, price : Int){
+        print("""
+        
+        갯수를 입력해주세요.
+        }
+        """)
+        self.name = name
+        self.price = price
+        var cnt = readLine()
+        guard let cnt = cnt else{return }
+        self.cnt = Int(cnt)
+           
+    }
+    init(){
+        
+    }
+    
+    func displayInfo()  {
         print("""
         [ Beer MENU ]
         1. Terra | W 4.0
@@ -39,39 +62,46 @@ class Beer {
         }
         """)
 
-        
+        var obj = Beer()
         var selectedStr = readLine()
         guard let selectedStr = selectedStr else{
             print("숫자로 선택해주세요.")
-            order = OrderBeer(name :"", price : BeerPrice.Default)
-            return order!.getPriceWithName()
+            return
             }
         let slectedNum = Int(selectedStr)
         guard let slectedNum = slectedNum else{
             print("올바른 번호를 선택해주세요")
-            order = OrderBeer(name :"", price : BeerPrice.Default)
-            return order!.getPriceWithName()
+            return
            }
         switch slectedNum{
+        case 0 :
+            
+            obj.showCountOf(name: "", price : 0)
+        
         case  1 :
             print("Terra를 선택하셨습니다")
-            order = OrderBeer(name :"Terra", price : BeerPrice.Terra)
+           
+            obj.showCountOf(name: "Terra", price : 4000)
+        
             
         case  2 :
             print("Cass를 선택하셨습니다")
-            order = OrderBeer(name :"Cass", price : BeerPrice.Cass)
+            obj.showCountOf(name: "Cass", price : 5000)
             
         case  3 :
             print("Cloud를 선택하셨습니다")
-            order = OrderBeer(name :"Cloud", price : BeerPrice.cloud)
+            obj.showCountOf(name: "Cloud", price : 6000)
             
         case  4 :
             print("Heineken를 선택하셨습니다")
-            order = OrderBeer(name :"Heineken", price : BeerPrice.Heineken)
+            obj.showCountOf(name: "Heineken", price : 7000)
             
         default :
-            print("올바른 번호로 선택해주세요.")
+            obj.showCountOf(name: "", price : 0)
         }
-        return order!.getPriceWithName()
+                
+        beerArray.append(obj)
+        print(beerArray)
+       
     }
 }

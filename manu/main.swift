@@ -9,7 +9,7 @@ import Foundation
 
 class DisplayInfo {
     
-    var MenuList : [Any] = []
+    var MenuList : [AnyObject] = []
     
     func display() {
         
@@ -51,8 +51,8 @@ class DisplayInfo {
                 print("price ->\(rValue2!.0), name ->\(rValue2!.1)")
             case 3 :
                 var rValue = (MenuList[2] as! Beer).displayInfo()
-                let rValue2 = (MenuList[2] as! Beer).order?.getPriceWithName()
-                print("price ->\(rValue2!.0), name ->\(rValue2!.1)")
+//                let rValue2 = (MenuList[2] as! Beer).order?.getPriceWithName()
+//                print("price ->\(rValue2!.0), name ->\(rValue2!.1)")
             case 4 :
                 print("1")
             case 0 :
