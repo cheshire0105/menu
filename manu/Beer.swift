@@ -1,37 +1,79 @@
 // Foundation 프레임워크를 import 합니다.
 import Foundation
 
-
 enum BeerPrice: Int {
     case Default = 0
     case Terra = 4000
     case Cass = 5000
-    case cloud = 6000
+    case Cloud = 6000
     case Heineken = 7000
 }
+class SuperBeer : MenuProc{
 
-class Beer : MenuProc {
+    func displayInfo() {
+        return
+    }
+    func SetCountOfItem(name: String, price: Int) {
+        return
+    }
+    
+    func deleteItem(index: Int) {
+        return
+    }
+    
+    func showPriceAll() -> Int {return 0}
+    
+    func showBeerInfo(){return}
+
+}
+
+
+class Beer : SuperBeer {
     var beerArray : Array<Beer>  = []
     var name : String?
     var cnt : Int?
     var price : Int?
     
-    func showBeerInfo(){
+    override func showBeerInfo(){
         for i in 0..<beerArray.count{
             print("beerArra[\(i)] -> 맥주이름: \(beerArray[i].name!),  가격 :\(beerArray[i].price!),  갯수 : \(beerArray[i].cnt!)\n")
         }
     }
     
-    func SetCountOfItem(name: String, price: Int)  {
+    override func SetCountOfItem(name: String, price: Int)  {
+        if let beerPrice = BeerPrice(rawValue: price)
+        {
+            switch beerPrice{
+            case .Default:
+                print("잘못된 가격입니다.")
+                self.price = price
+                break
+            case .Terra:
+                self.price = price
+                break
+            case .Cass:
+                self.price = price
+                break
+            case .Cloud:
+                self.price = price
+                break
+            case .Heineken:
+                self.price = price
+                break
+            }
+        }else{
+            print("가격을 잘못설정하셨습니다.")
+            return
+        }
+        
         print("갯수를 입력해주세요.")
         self.name = name
-        self.price = price
         let cnt = readLine()
         guard let cnt = cnt else{return  }
         self.cnt = Int(cnt)
     }
     
-    func deleteItem(index: Int){
+    override func deleteItem(index: Int){
         if(index >= beerArray.count){
             print("인덱스가 잘못되었습니다.")
             
@@ -41,7 +83,7 @@ class Beer : MenuProc {
             
         }
     }
-    func showPriceAll() -> Int{
+    override func showPriceAll() -> Int{
         var amount = 0
         for i in 0..<beerArray.count{
             amount = amount + beerArray[i].cnt! + beerArray[i].price!
@@ -50,7 +92,7 @@ class Beer : MenuProc {
     }
     
     
-    func displayInfo() {
+    override  func displayInfo() {
         print("""
                 [ Beer MENU ]
                 1. Terra | W 4.0
@@ -59,7 +101,7 @@ class Beer : MenuProc {
                 4. Heineken | W 7.0
                 0. 뒤로가기 | 뒤로가기
                 """)
-    
+        
         
         let beer = Beer()
         let selectedStr = readLine()
@@ -73,9 +115,10 @@ class Beer : MenuProc {
             return
         }
         
+        
         switch slectedNum{
         case 0 :
-             return
+            return
         case  1 :
             print("Terra를 선택하셨습니다")
             beer.SetCountOfItem(name: "Terra", price : 4000)
@@ -94,6 +137,8 @@ class Beer : MenuProc {
         default :
             beer.SetCountOfItem(name: "", price : 0)
         }
-        beerArray.append(beer)
+        if let beerName = beer.name,let beercnt = beer.cnt,let beerPrice = beer.price{
+            beerArray.append(beer)
+        }
     }
 }
