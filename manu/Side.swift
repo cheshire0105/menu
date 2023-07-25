@@ -8,29 +8,66 @@ enum SidePrice: Int {
     case CheeseFries = 5000
     case HotDog = 6000
 }
+class SuperSide: MenuProc{
+    
+    func displayInfo(){
+        return
+    }
+    func SetCountOfItem(name : String, price : Int){
+        return
+    }
+    func deleteItem(index : Int){
+        return
+    }
+    func showPriceAll() -> Int{return 0}
+    
+    func showSideInfo(){return}
+    
+}
 
-class Side : MenuProc {
+class Side : SuperSide{
     var sideArray : Array<Side>  = []
     var name : String?
     var cnt : Int?
     var price : Int?
     
-    func showSideInfo(){
+    override func showSideInfo(){
         for i in 0..<sideArray.count{
             print("sideArray[\(i)] -> 사이드이름: \(sideArray[i].name!),  가격 :\(sideArray[i].price!),  갯수 : \(sideArray[i].cnt!)\n")
         }
     }
     
-    func SetCountOfItem(name: String, price: Int)  {
+    override func SetCountOfItem(name: String, price: Int)  {
+        if let sidePrice = SidePrice(rawValue: price)
+        {
+            switch sidePrice{
+            case .Default:
+                print("잘못된 가격입니다.")
+                self.price = price
+                break
+            case .Fries:
+                self.price = price
+                break
+            case .CheeseFries:
+                self.price = price
+                break
+            case .HotDog:
+                self.price = price
+                break
+            }
+        }else{
+            print("가격을 잘못설정하였습니다.")
+            return
+        }
+        
         print("갯수를 입력해주세요.")
         self.name = name
-        self.price = price
         let cnt = readLine()
         guard let cnt = cnt else{return  }
         self.cnt = Int(cnt)
     }
     
-    func deleteItem(index: Int){
+    override func deleteItem(index: Int){
         if(index >= sideArray.count){
             print("인덱스가 잘못되었습니다.")
             
@@ -40,7 +77,7 @@ class Side : MenuProc {
             
         }
     }
-    func showPriceAll() -> Int{
+    override func showPriceAll() -> Int{
         var amount = 0
         for i in 0..<sideArray.count{
             amount = amount + sideArray[i].cnt! + sideArray[i].price!
@@ -49,7 +86,7 @@ class Side : MenuProc {
     }
     
     
-    func displayInfo() {
+    override func displayInfo() {
         print("""
                 [ Side MENU ]
                 1. Fries | W 4.0
@@ -57,7 +94,7 @@ class Side : MenuProc {
                 3. Hotdog | W 6.0
                 0. 뒤로가기 | 뒤로가기
                 """)
-    
+        
         
         let side = Side()
         let selectedStr = readLine()
@@ -73,7 +110,7 @@ class Side : MenuProc {
         
         switch slectedNum{
         case 0 :
-             return
+            return
         case  1 :
             print("Fries를 선택하셨습니다")
             side.SetCountOfItem(name: "Fries", price : 4000)
@@ -84,10 +121,13 @@ class Side : MenuProc {
         case  3 :
             print("Hotdog를 선택하셨습니다")
             side.SetCountOfItem(name: "Hotdog", price : 6000)
-
+            
         default :
             side.SetCountOfItem(name: "", price : 0)
         }
-        sideArray.append(side)
+        if let sideName = side.name,let sidecnt = side.cnt,let
+            sidePrice = side.price{
+            sideArray.append(side)
+        }
     }
 }
