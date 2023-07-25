@@ -36,7 +36,7 @@ class DisplayInfo {
     }
     
     func display() {
-        MenuList = [Hamburger() , Dessert(), Beer()] // 버거, 디저트, 사이드 , 맥주
+        MenuList = [Hamburger() , Dessert(), Beer(), Side()] // 버거, 디저트, 사이드 , 맥주
         while (true) {
             
             printMenu()
@@ -50,7 +50,8 @@ class DisplayInfo {
             case 2 :
                 var rValue = (MenuList[1] as! Dessert).displayInfo()
             case 3 :
-                print("3")
+                (MenuList[3] as! Side).displayInfo()
+                (MenuList[3] as! Side).showSideInfo()
             case 4 :
                 (MenuList[2] as! Beer).displayInfo()
                 (MenuList[2] as! Beer).showBeerInfo()
@@ -81,6 +82,9 @@ class DisplayInfo {
         
         let beerInfo = MenuList[2] as! Beer
         beerInfo.showBeerInfo()
+        
+        let sideInfo = MenuList[3] as! Side
+        sideInfo.showSideInfo()
     }
     
     //카트정보
@@ -129,7 +133,21 @@ class DisplayInfo {
             //let Desert = MenuList[1] as! Dessert
             //Desert.showBeerInfo()
         case 3 :
-            print("사이드쪽 구현")
+            let sideInfo = MenuList[3] as! Side
+            if sideInfo.sideArray.count == 0
+            {
+                print("선택 된 항목이 없습니다.")
+            }else{
+                sideInfo.showSideInfo()
+                print("지우고자 하는 인덱스를 선택해주세요.")
+                let deleteNum = readLine()
+                guard let deleteNum = deleteNum else{return}
+                guard let deleteNum = Int(deleteNum) else {return}
+                sideInfo.deleteItem(index: deleteNum)
+                print("현재 맥주 배열의 값은 다음과 같습니다.")
+            }
+            sideInfo.showSideInfo()
+            //print("사이드쪽 구현")
             //let Side = MenuList[2] as! Side
             //Side.showBeerInfo()
         case 4 :
