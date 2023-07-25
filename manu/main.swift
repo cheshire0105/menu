@@ -14,25 +14,29 @@ class DisplayInfo {
     func printMenu(){
         
         print("""
-아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.
-""")
+        아래 메뉴판을 보시고 메뉴를 골라 입력해주세요.
+        
+        """)
         print("""
-[ SHAKESHACK MENU ]
-1. Burgers | 앵거스 비프 통살을 다져만든 버거
-2. Frozen Custard | 매장에서 신선하게 만드는 아이스크림
-3. Side | 매장에서 직접 만드는 사이드
-4. Beer | 뉴욕 브루클린 브루어리에서 양조한 맥주
-5. Cart  | 장바구니 확인
-0. 종료 | 프로그램 종료
-""")
+        [ SHAKESHACK MENU ]
+        1. Burgers | 앵거스 비프 통살을 다져만든 버거
+        2. Frozen Custard | 매장에서 신선하게 만드는 아이스크림
+        3. Side | 매장에서 직접 만드는 사이드
+        4. Beer | 뉴욕 브루클린 브루어리에서 양조한 맥주
+        5. Cart  | 장바구니 확인
+        0. 종료 | 프로그램 종료
+        
+        """)
     }
+    
     func printCartMenu(){
         print("""
-[ Cart MENU ]
-0. 뒤로가기 | 전메뉴로 돌아갑니다.
-1. 확인 | 장부구니 메뉴를 확인합니다.
-2. 삭제 | 장바구니에서 메뉴를 삭제합니다.
-""")
+        [ Cart MENU ]
+        0. 뒤로가기 | 전메뉴로 돌아갑니다.
+        1. 확인 | 장부구니 메뉴를 확인합니다.
+        2. 삭제 | 장바구니에서 메뉴를 삭제합니다.
+        
+        """)
     }
     
     func display() {
@@ -43,12 +47,15 @@ class DisplayInfo {
             
             guard let click = readLine(),
                   let num = Int(click) else {
-                print("번호를 잘못 입력하셨습니다.\n")
+                print("번호를 입력하세요.\n")
                 continue
             }
             switch num {
+//            case 1 : burger
+                
             case 2 :
-                var rValue = (MenuList[1] as! Dessert).displayInfo()
+                (MenuList[1] as! Dessert).displayInfo()
+                (MenuList[1] as! Dessert).showDessertInfo()
             case 3 :
                 (MenuList[3] as! Side).displayInfo()
                 (MenuList[3] as! Side).showSideInfo()
@@ -76,9 +83,8 @@ class DisplayInfo {
         //let Hamburger = MenuList[0] as! Hamburger
         //Hamburger.showBeerInfo()
         
-        //추가 구현 디저트
-        //let Desert = MenuList[1] as! Dessert
-        //Desert.showBeerInfo()
+        let Desert = MenuList[1] as! Dessert
+        Desert.showDessertInfo()
         
         let beerInfo = MenuList[2] as! Beer
         beerInfo.showBeerInfo()
@@ -110,7 +116,7 @@ class DisplayInfo {
     
     func showDeleteInfo(){
        print("""
-        "[ DeleteMenu MENU ]
+        [ Delete MENU ]
         1. Burgers | 앵거스 비프 통살을 다져만든 버거
         2. Frozen Custard | 매장에서 신선하게 만드는 아이스크림
         3. Side | 매장에서 직접 만드는 사이드
@@ -129,9 +135,20 @@ class DisplayInfo {
             //Hamburger.showBeerInfo()
            
         case 2 :
-            print("디저트쪽 구현")
-            //let Desert = MenuList[1] as! Dessert
-            //Desert.showBeerInfo()
+            let dessertInfo = MenuList[1] as! Dessert
+            if dessertInfo.dessertArray.count == 0 {
+                print("선택 된 항목이 없습니다.")
+            } else {
+                dessertInfo.showDessertInfo()
+                print("지우고자 하는 메뉴 번호를 입력해주세요.")
+                let deleteStr = readLine()
+                guard let deleteStr = deleteStr else {return}
+                guard let deleteNum = Int(deleteStr) else {return}
+                dessertInfo.deleteItem(index: deleteNum)
+                print("삭제되었습니다. 현재 디저트 배열의 값은 다음과 같습니다.")
+            }
+            dessertInfo.showDessertInfo()
+            
         case 3 :
             let sideInfo = MenuList[3] as! Side
             if sideInfo.sideArray.count == 0
@@ -144,7 +161,7 @@ class DisplayInfo {
                 guard let deleteNum = deleteNum else{return}
                 guard let deleteNum = Int(deleteNum) else {return}
                 sideInfo.deleteItem(index: deleteNum)
-                print("현재 맥주 배열의 값은 다음과 같습니다.")
+                print("현재 사이드 배열의 값은 다음과 같습니다.")
             }
             sideInfo.showSideInfo()
             //print("사이드쪽 구현")
