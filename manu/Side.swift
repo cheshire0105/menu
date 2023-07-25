@@ -75,14 +75,14 @@ class Side : MenuProc {
         case 0 :
              return
         case  1 :
-            print("Terra를 선택하셨습니다")
+            print("Fries를 선택하셨습니다")
             side.SetCountOfItem(name: "Fries", price : 4000)
         case  2 :
-            print("Cass를 선택하셨습니다")
+            print("Cheese Fries를 선택하셨습니다")
             side.SetCountOfItem(name: "CheeseFries", price : 5000)
             
         case  3 :
-            print("Cloud를 선택하셨습니다")
+            print("Hotdog를 선택하셨습니다")
             side.SetCountOfItem(name: "Hotdog", price : 6000)
 
         default :
