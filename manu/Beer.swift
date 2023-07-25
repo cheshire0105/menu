@@ -1,4 +1,3 @@
-// Foundation 프레임워크를 import 합니다.
 import Foundation
 
 enum BeerPrice: Int {
