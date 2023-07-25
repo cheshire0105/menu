@@ -155,7 +155,7 @@ class Dessert : SuperDessert {
            let dessertCnt = dessert.cnt,
            let dessertPrice = dessert.price{
             dessertArray.append(dessert)
-            // 질문 왜 if let 사용하는지
+            
         }
         
     }
