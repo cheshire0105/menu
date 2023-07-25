@@ -36,7 +36,7 @@ class Beer : SuperBeer {
     
     override func showBeerInfo(){
         for i in 0..<beerArray.count{
-            print("beerArra[\(i)] -> 맥주이름: \(beerArray[i].name!),  가격 :\(beerArray[i].price!),  갯수 : \(beerArray[i].cnt!)\n")
+            print("beerArray[\(i)] -> 맥주이름: \(beerArray[i].name!),  가격 :\(beerArray[i].price!),  갯수 : \(beerArray[i].cnt!)\n")
         }
     }
     

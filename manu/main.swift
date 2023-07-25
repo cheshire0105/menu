@@ -51,8 +51,10 @@ class DisplayInfo {
                 continue
             }
             switch num {
-//            case 1 : burger
                 
+            case 1 :
+                (MenuList[0] as! Hamburger).displayInfo()
+                (MenuList[0] as! Hamburger).showBugerInfo()
             case 2 :
                 (MenuList[1] as! Dessert).displayInfo()
                 (MenuList[1] as! Dessert).showDessertInfo()
@@ -80,8 +82,8 @@ class DisplayInfo {
     //모든 정보를 나타내는 함수
     func showAllInfo(){
         //추가 구현  햄버거
-        //let Hamburger = MenuList[0] as! Hamburger
-        //Hamburger.showBeerInfo()
+        let Hamburger = MenuList[0] as! Hamburger
+        Hamburger.showBugerInfo()
         
         let Desert = MenuList[1] as! Dessert
         Desert.showDessertInfo()
@@ -130,10 +132,20 @@ class DisplayInfo {
         
         switch num{
         case 1 :
-            print("버거쪽 구현")
-            //let Hamburger = MenuList[0] as! Hamburger
-            //Hamburger.showBeerInfo()
-           
+            let bugertInfo = MenuList[0] as! Hamburger
+            if bugertInfo.bugerArray.count == 0 {
+                print("선택 된 항목이 없습니다.")
+            } else {
+                bugertInfo.showBugerInfo()
+                print("지우고자 하는 메뉴 번호를 입력해주세요.")
+                let deleteStr = readLine()
+                guard let deleteStr = deleteStr else {return}
+                guard let deleteNum = Int(deleteStr) else {return}
+                bugertInfo.deleteItem(index: deleteNum)
+                print("삭제되었습니다. 현재 디저트 배열의 값은 다음과 같습니다.")
+            }
+            bugertInfo.showBugerInfo()
+            
         case 2 :
             let dessertInfo = MenuList[1] as! Dessert
             if dessertInfo.dessertArray.count == 0 {

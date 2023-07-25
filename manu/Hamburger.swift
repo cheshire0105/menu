@@ -1,30 +1,5 @@
-// Foundation 프레임워크를 import 합니다.
 import Foundation
 
-// Order 클래스는 햄버거 주문을 나타냅니다.
-class Order{
-    // 주문한 햄버거의 이름을 나타냅니다.
-    var name : String?
-    // 주문한 햄버거의 가격을 나타냅니다.
-    var price : HamburgurPrice?
-    // 생성자 함수입니다. 주문을 생성하면서 햄버거의 이름과 가격을 설정합니다.
-    init(name: String? = "", price : HamburgurPrice? = HamburgurPrice.Default) {
-        self.name = name
-        self.price = price
-    }
-    // 주문 정보를 보여주는 함수입니다.
-    func showInfo(){
-        // 주문한 햄버거의 이름과 가격을 출력합니다.
-        print("name -> \(name),price -> \(price)")
-    }
-    // 주문한 햄버거의 가격과 이름을 반환하는 함수입니다.
-    func getPriceWithName() ->(UInt, String){
-        // 주문한 햄버거의 가격과 이름을 반환합니다.
-        return (UInt(price!.rawValue), name!)
-    }
-}
-
-// HamburgurPrice 열거형은 햄버거의 가격을 나타냅니다.
 enum HamburgurPrice: Int {
     case Default = 0
     case ShackBurger = 6900
@@ -34,64 +9,155 @@ enum HamburgurPrice: Int {
     case Hamburger = 5400
 }
 
-// Hamburger 클래스는 햄버거 주문을 처리합니다.
-class Hamburger {
-    // 주문 객체를 나타냅니다.
-    var order : Order?
+class superBuger : MenuProc{
     
-    // 사용자에게 메뉴를 보여주고, 사용자의 선택에 따라 주문을 생성하고, 선택한 햄버거의 가격과 이름을 반환하는 함수입니다.
-    func displayInfo() -> (UInt, String)  {
-        // 햄버거 메뉴를 출력합니다.
-        print("""
-        [ Burgers MENU ]
-        1. ShackBurger | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거
-        2. SmokeShack | W 8.9 | 베이컨, 체리 페퍼에 쉑소스가 토핑된 치즈버거
-        3. Shroom Burger | W 9.4 | 몬스터 치즈와 체다 치즈로 속을 채운 베지테리안 버거
-        4. Cheeseburger | W 6.9 | 포테이토 번과 비프패티, 치즈가 토핑된 치즈버거
-        5. Hamburger | W 5.4 | 비프패티를 기반으로 야채가 들어간 기본버거
-        0. 뒤로가기 | 뒤로가기
+    func displayInfo() {
+         return
+    }
+    
+    func SetCountOfItem(name: String, price: Int) {
+        return
+    }
+    
+    func deleteItem(index: Int) {
+        return
+    }
+    
+    
+    func showPriceAll() -> Int {
+        return 0
+    }
+    
+    func showBugerInfo() {return}
+}
+
+
+
+// Hamburger 클래스는 햄버거 주문을 처리합니다.
+class Hamburger : superBuger{
+    // 주문 객체를 나타냅니다.
+    var bugerArray : Array<Hamburger>  = []
+    var name : String?
+    var cnt : Int?
+    var price : Int?
+    
+    
+    override func showBugerInfo(){
+        for i in 0..<bugerArray.count{
+            print("BugerArray[\(i)] -> 햄버거이름: \(bugerArray[i].name!),  가격 :\(bugerArray[i].price!),  갯수 : \(bugerArray[i].cnt!)\n")
         }
-        """)
-        // 사용자의 선택을 입력받습니다.
-        var selectedStr = readLine()
-        // 선택이 유효한지 확인합니다.
+    }
+    
+    override func SetCountOfItem(name: String, price: Int)  {
+        if let bugerPrice = HamburgurPrice(rawValue: price)
+        {
+            switch bugerPrice{
+            case .Default:
+                print("잘못된 가격입니다.")
+                self.price = price
+                break
+            case .ShackBurger:
+                self.price = price
+                break
+            case .SmokeShack:
+                self.price = price
+                break
+            case .ShroomBurger:
+                self.price = price
+                break
+            case .Cheeseburger:
+                self.price = price
+            case .Hamburger:
+                self.price = price
+                break
+            }
+        }else{
+            print("가격을 잘못설정하셨습니다.")
+            return
+        }
+        
+        print("갯수를 입력해주세요.")
+        self.name = name
+        let cnt = readLine()
+        guard let cnt = cnt else{return  }
+        self.cnt = Int(cnt)
+    }
+    
+    override func deleteItem(index: Int){
+        if(index >= bugerArray.count){
+            print("인덱스가 잘못되었습니다.")
+            
+        }else{
+            print("아이템이 성공적으로 삭제되었습니다.")
+            bugerArray.remove(at: index)
+            
+        }
+    }
+    override func showPriceAll() -> Int{
+        var amount = 0
+        for i in 0..<bugerArray.count{
+            amount = amount + bugerArray[i].cnt! + bugerArray[i].price!
+        }
+        return amount
+    }
+    
+    
+    override  func displayInfo() {
+        print("""
+                [ Buger MENU ]
+                1. ShackBuger | W 6.9
+                2. SmokeShack | W 8.9
+                3. ShroomBuger | W 9.4
+                4. CheeseBuger | W 7.0
+                5. Hambuger | W 5.4
+                0. 뒤로가기 | 뒤로가기
+                """)
+        
+        
+        let buger = Hamburger()
+        let selectedStr = readLine()
         guard let selectedStr = selectedStr else{
             print("숫자로 선택해주세요.")
-            order = Order(name :"", price : HamburgurPrice.Default)
-            return order!.getPriceWithName()
-            }
+            return
+        }
         let slectedNum = Int(selectedStr)
         guard let slectedNum = slectedNum else{
             print("올바른 번호를 선택해주세요")
-            order = Order(name :"", price : HamburgurPrice.Default)
-            return order!.getPriceWithName()
-           }
-        // 사용자의 선택에 따라 주문을 생성하고 가격을 설정합니다.
+            return
+        }
+        
+        
         switch slectedNum{
+        case 0 :
+            return
         case  1 :
-            print("ShackBurger를 선택하셨습니다")
-            order = Order(name :"ShackBurger", price : HamburgurPrice.ShackBurger)
-            
+            print("ShackBuger를 선택하셨습니다")
+            buger.SetCountOfItem(name: "ShackBuger", price : 6900)
         case  2 :
-            print("SmokeShack를 선택하셨습니다")
-            order = Order(name :"SmokeShack", price : HamburgurPrice.SmokeShack)
+            print("SmokeBuger를 선택하셨습니다")
+            buger.SetCountOfItem(name: "SmokeBuger", price : 8900)
             
         case  3 :
-            print("Shroom를 선택하셨습니다")
-            order = Order(name :"ShroomBurger", price : HamburgurPrice.ShroomBurger)
+            print("ShroomBuger를 선택하셨습니다")
+            buger.SetCountOfItem(name: "ShroomBuger", price : 9400)
             
         case  4 :
-            print("Cheeseburger를 선택하셨습니다")
-            order = Order(name :"Cheeseburger", price : HamburgurPrice.Cheeseburger)
+            print("Cheesebuger를 선택하셨습니다")
+            buger.SetCountOfItem(name: "Cheesebuger", price : 7000)
+        case 5 :
+            print("Hambuger를 선택하셨습니다")
+            buger.SetCountOfItem(name: "Hambuger", price : 5400)
             
-        case  5 :
-            print("Hamburger를 선택하셨습니다")
-            order = Order(name :"Hamburger", price : HamburgurPrice.Hamburger)
             
         default :
-            print("올바른 번호로 선택해주세요.")
+            buger.SetCountOfItem(name: "", price : 0)
         }
-        // 선택한 햄버거의 가격과 이름을 반환합니다.
-        return order!.getPriceWithName()
+        if let bugerName = buger.name,let beercnt = buger.cnt,let bugerPrice = buger.price{
+            bugerArray.append(buger)
+        }
     }
 }
+
+    
+    
+ 
